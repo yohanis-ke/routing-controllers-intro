@@ -10,10 +10,23 @@ before_action :set_kitten_url, only: [:kitten, :kittens]
     @header = "This is about us page"
   end
 
+  def contest
+    flash[:notice] = "Sorry, the contest has ended"
+    redirect_to "/welcome"
+  end
+
   def kitten
-    # @header = "This is the kitten page"
-    # requested_size = params[:size]
-    # @kitten_url = "https://picsum.photos/#{requested_size}/#{requested_size}"
+
+  end
+
+  def secrets
+   magic_word= params[:magic_word]
+     if magic_word=="abc"
+      render :secrets
+     else
+      flash[:alert] = "Sorry, you're not authorized to see that page!"
+      redirect_to "/welcome"
+    end
   end
 
   def kittens
